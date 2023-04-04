@@ -3,9 +3,9 @@
  url = https://github.com/mohammed1916/middlewareserver
 
 [submodule "portfolio"]
- path = middlewareserver
+ path = portfolio
  url = https://github.com/mohammed1916/portfolio
 
 [submodule "serverside"]
- path = middlewareserver
+ path = serverside
  url = https://github.com/mohammed1916/serverside

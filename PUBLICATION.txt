@@ -1,0 +1,6 @@
+This project is an implementation of the paper which will be published in the scopus indexed journal:
+Journal of Survey in Fisheries Science
+
+URL: http://sifisheriessciences.com/journal/index.php/journal/article/view/1172/1184
+
+Karthikeyan A, Mohammed Abdullah, B Jeevan Akshay & Kevin Christopher A. (in press). "Expediting HR Management Via Dynamic E-Portfolio by Employing Web Scrapper," Journal of Survey in Fisheries Sciences, Vol. 10 No. 4S (2023):(Special Issue 4). http://sifisheriessciences.com/journal/index.php/journal/article/view/1172/1184

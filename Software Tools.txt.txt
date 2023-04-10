@@ -1,0 +1,15 @@
+Front End:
+React
+
+Back End:
+Firebase Realtime database
+
+Web Scrapper:
+Puppeteer
+
+Testing Tools:
+Chrome DevTools
+
+APIs:
+1) ExpressJS Rest API
+2) Socket.io npm module

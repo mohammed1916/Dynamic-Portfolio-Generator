@@ -7,8 +7,8 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import { ref, child, get } from "firebase/database";
 import { database } from '../../firebase-config';
 
@@ -49,10 +49,12 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 var skillsItems = [];
-export default function Skills() {
+export default function Skills()
+{
     const [expanded, setExpanded] = React.useState('panel1');
 
-    const handleChange = (panel) => (event, newExpanded) => {
+    const handleChange = (panel) => (event, newExpanded) =>
+    {
         setExpanded(newExpanded ? panel : false);
     };
 
@@ -66,11 +68,15 @@ export default function Skills() {
     const [KnowledgeInMainConcepts, setKnowledgeInMainConcepts] = useState([]);
     const [Beginner, setBeginner] = useState([]);
 
-    useEffect(() => {
-        get(child(dbRef, `${user}/skillsinfo/skills`)).then((snapshot) => {
+    useEffect(() =>
+    {
+        get(child(dbRef, `${user}/skillsinfo/skills`)).then((snapshot) =>
+        {
             console.log("UserID", user);
-            if (snapshot.exists()) {
-                snapshot.forEach(function (item) {
+            if (snapshot.exists())
+            {
+                snapshot.forEach(function (item)
+                {
                     var itemVal = item.val();
                     skillsItems.push(itemVal);
                     console.log("val ...", itemVal);
@@ -82,15 +88,18 @@ export default function Skills() {
                         setValues(index)
                     )
                 );
-            } else {
+            } else
+            {
                 console.log("No data available in Skills.js");
             }
-        }).catch((error) => {
+        }).catch((error) =>
+        {
             console.error("error ...", error);
         });
     }, []);
 
-    function setValues(i) {
+    function setValues(i)
+    {
         settype(oldArray => [...oldArray, skillsItems[i]["type"]]);
         setKnowledgeInAdvanceTopics(oldArray => [...oldArray, skillsItems[i]["KnowledgeInAdvanceTopics"]]);
         setKnowledgeInMainConcepts(oldArray => [...oldArray, skillsItems[i]["KnowledgeInMainConcepts"]]);
@@ -107,63 +116,63 @@ export default function Skills() {
                 bgcolor={'white'}
                 color={'white'} >
                 <Container sx={{ width: '100%' }}>
-                    <Typography textAlign="center" fontFamily={'Righteous'} fontSize={'40px'} color={'black'} pt={{ xs: 1, sm: 2 }}>Skills</Typography>
-                    <Box bgcolor={'#eee'} borderRadius={'20px'} padding={'10px'}>
+                    <Typography textAlign="center" fontFamily={'Gilroy Bold'} fontSize={'40px'} color={'black'} pt={{ xs: 1, sm: 2 } > Skills</Typography>
+                <Box bgcolor={'#eee'} borderRadius={'20px'} padding={'10px'}>
 
-                        <Accordion key={0} expanded={expanded === `panel${0}`} onChange={handleChange(`panel${0}`)}>
-                            <AccordionSummary aria-controls={`panel${0}d-content`} id={`panel${0}d-header`}>
-                                <Typography>{type[0]}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    {`Knowledge in Advance Topics: ${KnowledgeInAdvanceTopics[0]}`}
-                                </Typography>
-                                <Typography>
-                                    {`Knowledge in Main Concepts: ${KnowledgeInMainConcepts[0]}`}
-                                </Typography>
-                                <Typography>
-                                    {`Beginner: ${Beginner[0]}`}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
+                    <Accordion key={0} expanded={expanded === `panel${0}`} onChange={handleChange(`panel${0}`)}>
+                        <AccordionSummary aria-controls={`panel${0}d-content`} id={`panel${0}d-header`}>
+                            <Typography>{type[0]}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                {`Knowledge in Advance Topics: ${KnowledgeInAdvanceTopics[0]}`}
+                            </Typography>
+                            <Typography>
+                                {`Knowledge in Main Concepts: ${KnowledgeInMainConcepts[0]}`}
+                            </Typography>
+                            <Typography>
+                                {`Beginner: ${Beginner[0]}`}
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
 
-                        <Accordion key={1} expanded={expanded === `panel${1}`} onChange={handleChange(`panel${1}`)}>
-                            <AccordionSummary aria-controls={`panel${1}d-content`} id={`panel${1}d-header`}>
-                                <Typography>{type[1]}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    {`Knowledge in Advance Topics: ${KnowledgeInAdvanceTopics[1]}`}
-                                </Typography>
-                                <Typography>
-                                    {`Knowledge in Main Concepts: ${KnowledgeInMainConcepts[1]}`}
-                                </Typography>
-                                <Typography>
-                                    {`Beginner: ${Beginner[1]}`}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
+                    <Accordion key={1} expanded={expanded === `panel${1}`} onChange={handleChange(`panel${1}`)}>
+                        <AccordionSummary aria-controls={`panel${1}d-content`} id={`panel${1}d-header`}>
+                            <Typography>{type[1]}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                {`Knowledge in Advance Topics: ${KnowledgeInAdvanceTopics[1]}`}
+                            </Typography>
+                            <Typography>
+                                {`Knowledge in Main Concepts: ${KnowledgeInMainConcepts[1]}`}
+                            </Typography>
+                            <Typography>
+                                {`Beginner: ${Beginner[1]}`}
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
 
-                        <Accordion key={2} expanded={expanded === `panel${2}`} onChange={handleChange(`panel${2}`)}>
-                            <AccordionSummary aria-controls={`panel${2}d-content`} id={`panel${2}d-header`}>
-                                <Typography>{type[2]}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    {`Knowledge in Advance Topics: ${KnowledgeInAdvanceTopics[2]}`}
-                                </Typography>
-                                <Typography>
-                                    {`Knowledge in Main Concepts: ${KnowledgeInMainConcepts[2]}`}
-                                </Typography>
-                                <Typography>
-                                    {`Beginner: ${Beginner[2]}`}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
+                    <Accordion key={2} expanded={expanded === `panel${2}`} onChange={handleChange(`panel${2}`)}>
+                        <AccordionSummary aria-controls={`panel${2}d-content`} id={`panel${2}d-header`}>
+                            <Typography>{type[2]}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                {`Knowledge in Advance Topics: ${KnowledgeInAdvanceTopics[2]}`}
+                            </Typography>
+                            <Typography>
+                                {`Knowledge in Main Concepts: ${KnowledgeInMainConcepts[2]}`}
+                            </Typography>
+                            <Typography>
+                                {`Beginner: ${Beginner[2]}`}
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
 
-                    </Box>
-                </Container>
-            </Box>
+                </Box>
+            </Container>
+        </Box >
         </>
 
 

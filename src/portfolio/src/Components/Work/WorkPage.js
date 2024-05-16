@@ -1,7 +1,8 @@
-import Container from '@mui/material/Container'
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box'
-import {
+import Box from '@mui/material/Box';
+import
+{
     useNavigate
 } from "react-router-dom";
 import { ref, child, get } from "firebase/database";
@@ -11,14 +12,16 @@ import { useEffect } from 'react';
 import { database } from '../../firebase-config';
 
 var workItems = [];
-export default function WorkPage() {
+export default function WorkPage()
+{
     const params = useParams();
     var user = params.username;
 
     let navigate = useNavigate();
-    const nav = (index) => {
-        navigate(`/${user}/home/workpage/${index}`)
-    }
+    const nav = (index) =>
+    {
+        navigate(`/${user}/home/workpage/${index}`);
+    };
 
     const dbRef = ref(database);
     const [companyPlaceHolder, setcompanyPlaceholder] = React.useState([]);
@@ -28,11 +31,15 @@ export default function WorkPage() {
     const [datesPlaceHolder, setdatesPlaceholder] = React.useState([]);
     const [descriptionPlaceHolder, setdescriptionPlaceholder] = React.useState([]);
 
-    useEffect(() => {
-        get(child(dbRef, `${user}/workinfo/work/`)).then((snapshot) => {
+    useEffect(() =>
+    {
+        get(child(dbRef, `${user}/workinfo/work/`)).then((snapshot) =>
+        {
             console.log("UserID", user);
-            if (snapshot.exists()) {
-                snapshot.forEach(function (item) {
+            if (snapshot.exists())
+            {
+                snapshot.forEach(function (item)
+                {
                     var itemVal = item.val();
                     workItems.push(itemVal);
                 });
@@ -42,15 +49,18 @@ export default function WorkPage() {
                         setValues(index)
                     )
                 );
-            } else {
+            } else
+            {
                 console.log("No data available in Education.js");
             }
-        }).catch((error) => {
+        }).catch((error) =>
+        {
             console.error("error ...", error);
         });
     }, []);
 
-    function setValues(i) {
+    function setValues(i)
+    {
         setcompanyPlaceholder(oldArray => [...oldArray, workItems[i]["company"]]);
         setlocationPlaceholder(oldArray => [...oldArray, workItems[i]["location"]]);
         settitlePlaceholder(oldArray => [...oldArray, workItems[i]["title"]]);
@@ -68,53 +78,53 @@ export default function WorkPage() {
                 bgcolor={'white'}
                 color={'white'} >
                 <Container sx={{ width: '100%' }}>
-                    <Typography textAlign="center" fontFamily={'Righteous'} fontSize={'40px'} color={'black'} pt={{ xs: 1, sm: 2 }}>Work Experience</Typography>
-                    <Box display={'flex'} flexDirection={'column'} bgcolor={'#eee'} borderRadius={'20px'} padding={'10px'}>
-                        <img src={thumbnailPlaceHolder[params.i]} />
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {"Job: "}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${titlePlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {"Company: "}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${companyPlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
-
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {`Location:`}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${locationPlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {`Date:`}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${datesPlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {`Description: `}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${descriptionPlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
+                    <Typography textAlign="center" fontFamily={'Gilroy Bold'} fontSize={'40px'} color={'black'} pt={{ xs: 1, sm: 2 } > Work Experience</Typography>
+                <Box display={'flex'} flexDirection={'column'} bgcolor={'#eee'} borderRadius={'20px'} padding={'10px'}>
+                    <img src={thumbnailPlaceHolder[params.i]} />
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {"Job: "}
+                        </Typography>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${titlePlaceHolder[params.i]}`}
+                        </Typography>
                     </Box>
-                </Container>
-            </Box>
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {"Company: "}
+                        </Typography>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${companyPlaceHolder[params.i]}`}
+                        </Typography>
+                    </Box>
+
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {`Location:`}
+                        </Typography>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${locationPlaceHolder[params.i]}`}
+                        </Typography>
+                    </Box>
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {`Date:`}
+                        </Typography>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${datesPlaceHolder[params.i]}`}
+                        </Typography>
+                    </Box>
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {`Description: `}
+                        </Typography>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${descriptionPlaceHolder[params.i]}`}
+                        </Typography>
+                    </Box>
+                </Box>
+            </Container>
+        </Box >
         </>
     );
 }

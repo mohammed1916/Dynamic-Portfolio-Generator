@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useParams } from "react-router-dom";
 import { useEffect } from 'react';
-import Container from '@mui/material/Container'
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box'
+import Box from '@mui/material/Box';
 // import puppeteer from 'puppeteer';
 import { ref, child, get } from "firebase/database";
 import { database } from '../../firebase-config';
@@ -35,7 +35,8 @@ import { database } from '../../firebase-config';
 // }
 
 var certificateItems = [];
-export default function CertificatePage() {
+export default function CertificatePage()
+{
     // retrieve()
     const params = useParams();
     var user = params.username;
@@ -47,11 +48,15 @@ export default function CertificatePage() {
     const [thumbnailPlaceHolder, setthumbnailPlaceholder] = React.useState([]);
     const [descriptionPlaceHolder, setdescriptionPlaceholder] = React.useState([]);
 
-    useEffect(() => {
-        get(child(dbRef, `${user}/certificatesinfo/certificates/`)).then((snapshot) => {
+    useEffect(() =>
+    {
+        get(child(dbRef, `${user}/certificatesinfo/certificates/`)).then((snapshot) =>
+        {
             console.log("UserID", user);
-            if (snapshot.exists()) {
-                snapshot.forEach(function (item) {
+            if (snapshot.exists())
+            {
+                snapshot.forEach(function (item)
+                {
                     var itemVal = item.val();
                     certificateItems.push(itemVal);
                     // console.log("val ...", itemVal);
@@ -63,15 +68,18 @@ export default function CertificatePage() {
                         setValues(index)
                     )
                 );
-            } else {
+            } else
+            {
                 console.log("No data available in Education.js");
             }
-        }).catch((error) => {
+        }).catch((error) =>
+        {
             console.error("error ...", error);
         });
     }, []);
 
-    function setValues(i) {
+    function setValues(i)
+    {
         settitlePlaceholder(oldArray => [...oldArray, certificateItems[i]["title"]]);
         setdatePlaceholder(oldArray => [...oldArray, certificateItems[i]["date"]]);
         setinstitutionPlaceholder(oldArray => [...oldArray, certificateItems[i]["institution"]]);
@@ -90,43 +98,43 @@ export default function CertificatePage() {
                 bgcolor={'white'}
                 color={'white'} >
                 <Container sx={{ width: '100%' }}>
-                    <Typography textAlign="center" fontFamily={'Righteous'} fontSize={'40px'} color={'black'} pt={{ xs: 1, sm: 2 }}>Certificate</Typography>
-                    <Box display={'flex'} flexDirection={'column'} bgcolor={'#eee'} borderRadius={'20px'} padding={'10px'}>
+                    <Typography textAlign="center" fontFamily={'Gilroy Bold'} fontSize={'40px'} color={'black'} pt={{ xs: 1, sm: 2 } > Certificate</Typography>
+                <Box display={'flex'} flexDirection={'column'} bgcolor={'#eee'} borderRadius={'20px'} padding={'10px'}>
 
 
 
-                        <Typography color={'black'} gutterBottom variant="h5" component="div" textAlign={'center'} paddingBottom={'8px'}>
-                            {titlePlaceHolder[params.i]}
+                    <Typography color={'black'} gutterBottom variant="h5" component="div" textAlign={'center'} paddingBottom={'8px'}>
+                        {titlePlaceHolder[params.i]}
+                    </Typography>
+                    <img src={thumbnailPlaceHolder[params.i]} />
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {"Date: "}
                         </Typography>
-                        <img src={thumbnailPlaceHolder[params.i]} />
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {"Date: "}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${datePlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
-
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {`Institution:`}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${institutionPlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
-                        <Box display={'flex'} flexDirection={'row'} >
-                            <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
-                                {`Description: `}
-                            </Typography>
-                            <Typography color={'black'} gutterBottom variant="h6" component="div"  >
-                                {`${descriptionPlaceHolder[params.i]}`}
-                            </Typography>
-                        </Box>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${datePlaceHolder[params.i]}`}
+                        </Typography>
                     </Box>
-                </Container>
-            </Box>
+
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {`Institution:`}
+                        </Typography>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${institutionPlaceHolder[params.i]}`}
+                        </Typography>
+                    </Box>
+                    <Box display={'flex'} flexDirection={'row'} >
+                        <Typography color={'black'} gutterBottom variant="h6" component="div" style={{ fontWeight: 600 }} paddingRight={'5px'}>
+                            {`Description: `}
+                        </Typography>
+                        <Typography color={'black'} gutterBottom variant="h6" component="div"  >
+                            {`${descriptionPlaceHolder[params.i]}`}
+                        </Typography>
+                    </Box>
+                </Box>
+            </Container>
+        </Box >
         </>
     );
 }

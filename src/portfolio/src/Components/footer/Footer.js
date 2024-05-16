@@ -1,7 +1,7 @@
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
-import Grid from '@mui/material/Grid'
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
@@ -18,7 +18,8 @@ import { database } from '../../firebase-config';
 var mediaItems = [];
 var educationItems = [];
 var educationItemsLength = 0;
-export default function Footer() {
+export default function Footer()
+{
 
     const params = useParams();
     var user = params.username;
@@ -27,11 +28,15 @@ export default function Footer() {
     const [iconPlaceHolder, seticonPlaceholder] = React.useState([]);
     const dbRef = ref(database);
 
-    useEffect(() => {
-        get(child(dbRef, `${user}/socialmediaprofilesinfo/profiles`)).then((snapshot) => {
+    useEffect(() =>
+    {
+        get(child(dbRef, `${user}/socialmediaprofilesinfo/profiles`)).then((snapshot) =>
+        {
             console.log("UserID", user);
-            if (snapshot.exists()) {
-                snapshot.forEach(function (item) {
+            if (snapshot.exists())
+            {
+                snapshot.forEach(function (item)
+                {
                     var itemVal = item.val();
                     mediaItems.push(itemVal);
                 });
@@ -41,15 +46,18 @@ export default function Footer() {
                         setValues(index)
                     )
                 );
-            } else {
+            } else
+            {
                 console.log("No data available in Education.js");
             }
-        }).catch((error) => {
+        }).catch((error) =>
+        {
             console.error("error ...", error);
         });
     }, []);
 
-    function setValues(i) {
+    function setValues(i)
+    {
         setmediaPlaceholder(oldArray => [...oldArray, mediaItems[i]["media"]]);
         seturlPlaceholder(oldArray => [...oldArray, mediaItems[i]["url"]]);
         seticonPlaceholder(oldArray => [...oldArray, mediaItems[i]["icon"]]);
@@ -61,18 +69,23 @@ export default function Footer() {
     const [emailPlaceHolder, setemailPlaceholder] = React.useState();
 
 
-    useEffect(() => {
-        get(child(dbRef, `${user}/information`)).then((snapshot) => {
+    useEffect(() =>
+    {
+        get(child(dbRef, `${user}/information`)).then((snapshot) =>
+        {
             console.log("UserID", params.username);
-            if (snapshot.exists()) {
+            if (snapshot.exists())
+            {
                 console.log("val ...", snapshot.val());
                 setnamePlaceholder(snapshot.child("name/").val());
                 setWhoamiPlaceholder(snapshot.child("whoami/").val());
                 setemailPlaceholder(snapshot.child("email/").val());
-            } else {
+            } else
+            {
                 console.log("No data available in About.js");
             }
-        }).catch((error) => {
+        }).catch((error) =>
+        {
             console.error("error ...", error);
         });
     }, []);
